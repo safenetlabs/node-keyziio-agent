@@ -1,5 +1,6 @@
 {
   "name": "aasguard",
+  "private": true,
   "version": "0.0.1",
   "description": "Interface library to the SafeX web based key management service",
   "main": "index.js",
