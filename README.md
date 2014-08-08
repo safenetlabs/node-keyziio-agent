@@ -9,7 +9,7 @@ A Node.js interface library for the SafeX key management service.  Asynchronous 
 aasguard.set_token("token");
 ```
 
-### Checking the API Token against the server
+### Checking the API Token
 
 ```javascript
 aasguard.check()
@@ -21,7 +21,7 @@ aasguard.check()
     });
 ```
 
-### Getting user infomration:
+### Getting User Infomration
 
 ```javascript
 aasguard.get_user(req.params.id)
@@ -33,7 +33,7 @@ aasguard.get_user(req.params.id)
   });
 ```
 
-### Creating a new user:
+### Creating a New User
  
 ```javascript
  aasguard.create_user(req.params.id, "friendly_"+req.params.id)
