@@ -57,7 +57,7 @@ function get_user(id) {
                     error.res = resp;
                     return reject(error);
                 }
-                return resolve(true);
+                return resolve(body);
             });
     });
 }
