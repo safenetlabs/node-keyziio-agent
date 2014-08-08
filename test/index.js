@@ -1,8 +1,6 @@
 /**
  * Created by dpitard on 8/6/14.
  */
-
-require('mocha-sinon');
 var chai = require("chai");
 var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
@@ -27,31 +25,17 @@ describe('#aasguard', function(){
     });
 
     it ('checks against the server', function(done) {
-        //aasguard.check().should.eventually.equal(true);
-
-        aasguard.check(function(ok){
-                ok.should.equal(true)
-                done()
-            }
-        )
+        aasguard.check().should.eventually.equal(true).notify(done);
     });
 
     it ('tells me a user is not there', function(done){
-        aasguard.get_user("fakeid", function(user, error){
-            error.should.equal(true);
-            done()
-        })
+        aasguard.get_user("fakeid").should.be.rejected.notify(done);
     });
 
     it ('creates a new user', function(done){
         var uid = Math.random().toString().substring(2);
-        aasguard.create_user(uid, "friendly", function(user, error){
-            error.should.equal(false);
-
-            aasguard.get_user(uid, function(user, error){
-                error.should.equal(false)
-                done()
-            })
-        })
-    })
+        aasguard.create_user(uid, "friendly")
+            .then(aasguard.get_user(uid))
+            .should.eventually.be.fulfilled.notify(done);
+     });
 });

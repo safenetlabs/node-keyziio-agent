@@ -3,7 +3,7 @@
  */
 
 var request = require('request');
-var Promise = require('promise');
+var Promise = require('es6-promise').Promise;
 
 var token;
 
@@ -24,66 +24,64 @@ module.exports = {
     create_user: create_user
 };
 
-function check2(){
-    var promise = new Promise(function(resolve, reject){
-        request("http://safex-demo.herokuapp.com/api/v1/check?api_token=" + token, function(error, resp, body){
-            if (!error && resp.statusCode == 200) {
-                resolve(true)
+function check() {
+    return new Promise(function (resolve, reject) {
+        var url = "http://safex-demo.herokuapp.com/api/v1/check?api_token=" + token;
+        request.get(url, function (error, resp, body) {
+            if (error) {
+                return reject(error);
+            } else if (resp.statusCode != 200) {
+                error = new Error("Unexpected status code: " + resp.statusCode);
+                error.res = resp;
+                return reject(error);
             }
-            else {
-                resolve(false)
-            }
+            return resolve(true);
         });
     });
-    //return promise;
 }
 
-function check(callback) {
-    url = "http://safex-demo.herokuapp.com/api/v1/check?api_token=" + token
-    request.get(url, function (error, resp, body) {
-        if (!error && resp.statusCode == 200) {
-            callback(true)
-        }
-        else {
-            callback(false)
-        }
-    });
-}
-
-function get_user(id, callback) {
-    var url = "http://safex-demo.herokuapp.com/api/v1/users/" + id + "?api_token=" + token;
-    request.get(url,
-        {headers: {
-            'Accept': 'application/json'
+function get_user(id) {
+    return new Promise(function(resolve, reject){
+        var url = "http://safex-demo.herokuapp.com/api/v1/users/" + id + "?api_token=" + token;
+        request.get(url,
+            {headers: {
+                'Accept': 'application/json'
             },
-            json: true
-        },
-        function (error, resp, body){
-        if (!error && resp.statusCode == 200) {
-            callback(body, false)
-        }
-        else {
-            callback(null, true)
-        }
+                json: true
+            },
+            function (error, resp, body){
+                if (error) {
+                    return reject(error);
+                } else if (resp.statusCode !== 200) {
+                    error = new Error("Unexpected status code: " + resp.statusCode);
+                    error.res = resp;
+                    return reject(error);
+                }
+                return resolve(true);
+            });
     });
 }
 
-function create_user(id, friendly_name, callback) {
-    var url = "http://safex-demo.herokuapp.com/api/v1/users?api_token=" + token;
-    request.post(url,
-        {form: {asp_id: id, friendly_name: friendly_name},
-         headers: {
-             'Accept':'application/json'
-         },
-         json: true
-        },
+function create_user(id, friendly_name) {
+    return new Promise(function(resolve, reject){
+        var url = "http://safex-demo.herokuapp.com/api/v1/users?api_token=" + token;
+        request.post(url,
+            {form: {asp_id: id, friendly_name: friendly_name},
+                headers: {
+                    'Accept':'application/json'
+                },
+                json: true
+            },
 
-        function(error, resp, body){
-            if (!error && resp.statusCode == 201) {
-                callback(body, false)
-            }
-            else {
-                callback(null, true)
-            }
-    })
+            function(error, resp, body){
+                if (error) {
+                    return reject(error);
+                } else if (resp.statusCode !== 201) {
+                    error = new Error("Unexpected status code: " + resp.statusCode);
+                    error.res = resp;
+                    return reject(error);
+                }
+                return resolve(body);
+            })
+    });
 }
