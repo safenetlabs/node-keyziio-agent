@@ -3,7 +3,7 @@ node-aasguard
 
 A Node.js interface library for the SafeX key management service.  Asynchronous methods use promises.
 
-### Setting the API Token:
+### Setting the API Token
 
 ```javascript
 aasguard.set_token("token");
