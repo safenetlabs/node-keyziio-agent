@@ -24,7 +24,7 @@ aasguard.check()
 ### Getting User Infomration
 
 ```javascript
-aasguard.get_user(req.params.id)
+aasguard.get_user(id)
   .then(function(data){
     // Got the user
   })
@@ -36,7 +36,7 @@ aasguard.get_user(req.params.id)
 ### Creating a New User
  
 ```javascript
- aasguard.create_user(req.params.id, "friendly_"+req.params.id)
+ aasguard.create_user(id, friendly_name)
     .then(function(data){
       // User created!
     })
