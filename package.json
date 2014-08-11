@@ -12,7 +12,8 @@
   "devDependencies": {
     "mocha": "^1.21.3",
     "chai": "^1.9.1",
-    "chai-as-promised": "^4.1.1"
+    "chai-as-promised": "^4.1.1",
+    "nock": "^0.44.1"
   },
   "dependencies": {
     "request": "^2.40.0",
