@@ -6,6 +6,7 @@ var request = require('request');
 var Promise = require('es6-promise').Promise;
 
 var token;
+var server_url = "http://safex-demo.herokuapp.com";
 
 module.exports = {
     set_token: function(in_token) {
@@ -21,12 +22,17 @@ module.exports = {
 
     get_user: get_user,
 
-    create_user: create_user
+    create_user: create_user,
+
+    //For testing purposes
+    set_server: function(url) {
+        server_url = url;
+    }
 };
 
 function check() {
     return new Promise(function (resolve, reject) {
-        var url = "http://safex-demo.herokuapp.com/api/v1/check?api_token=" + token;
+        var url = server_url + "/api/v1/check?api_token=" + token;
         request.get(url, function (error, resp, body) {
             if (error) {
                 return reject(error);
@@ -42,7 +48,7 @@ function check() {
 
 function get_user(id) {
     return new Promise(function(resolve, reject){
-        var url = "http://safex-demo.herokuapp.com/api/v1/users/" + id + "?api_token=" + token;
+        var url = server_url + "/api/v1/users/" + id + "?api_token=" + token;
         request.get(url,
             {headers: {
                 'Accept': 'application/json'
@@ -64,7 +70,7 @@ function get_user(id) {
 
 function create_user(id, friendly_name) {
     return new Promise(function(resolve, reject){
-        var url = "http://safex-demo.herokuapp.com/api/v1/users?api_token=" + token;
+        var url = server_url + "/api/v1/users?api_token=" + token;
         request.post(url,
             {form: {asp_id: id, friendly_name: friendly_name},
                 headers: {
