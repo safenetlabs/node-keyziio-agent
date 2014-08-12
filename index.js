@@ -6,7 +6,7 @@ var request = require('request');
 var Promise = require('es6-promise').Promise;
 
 var token;
-var server_url = "http://safex-demo.herokuapp.com";
+var server_url = "http://keyziio.herokuapp.com";
 
 module.exports = {
     set_token: function(in_token) {
