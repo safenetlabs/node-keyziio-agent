@@ -1,8 +1,8 @@
 {
-  "name": "aasguard",
+  "name": "keyziio-agent",
   "private": true,
   "version": "0.0.1",
-  "description": "Interface library to the SafeX web based key management service",
+  "description": "Interface library to the keyziio web based key management service",
   "main": "index.js",
   "scripts": {
     "test": "make test"

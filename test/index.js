@@ -6,18 +6,18 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 var nock = require("nock");
 var should = require('chai').should();
-var aasguard = require('../index');
+var kagent = require('../index');
 
-describe('#aasguard', function(){
-    var aasguard;
+describe('#keyziio-agent', function(){
+    var kagent;
     beforeEach(function(){
-        aasguard = require('../index');
-        aasguard.set_token("cnZNqHoOXDML9eSSZI").should.equal(true);
+        kagent = require('../index');
+        kagent.set_token("cnZNqHoOXDML9eSSZI").should.equal(true);
     });
 
     it ('sets and gets the token', function() {
-        aasguard.set_token("testtoken").should.equal(true);
-        aasguard.get_token().should.equal('testtoken')
+        kagent.set_token("testtoken").should.equal(true);
+        kagent.get_token().should.equal('testtoken')
     });
 
     it ('checks against the server', function(done) {
@@ -28,7 +28,7 @@ describe('#aasguard', function(){
             .reply(200, {
             });
 
-        aasguard.check().should.eventually.equal(true).notify(done);
+        kagent.check().should.eventually.equal(true).notify(done);
     });
 
     it ('tells me a user is not there', function(done){
@@ -39,7 +39,7 @@ describe('#aasguard', function(){
             .get('api/v1/users/fakeid?api_token=XXX')
             .reply(404);
 
-        aasguard.get_user("fakeid").should.be.rejected.notify(done);
+        kagent.get_user("fakeid").should.be.rejected.notify(done);
     });
 
     it ('creates a new user', function(done){
@@ -52,8 +52,8 @@ describe('#aasguard', function(){
             .get('/api/v1/users/' + uid + '?api_token=XXX')
             .reply(200);
 
-        aasguard.create_user(uid, "friendly")
-            .then(aasguard.get_user(uid))
+        kagent.create_user(uid, "friendly")
+            .then(kagent.get_user(uid))
             .should.eventually.be.fulfilled.notify(done);
      });
 });

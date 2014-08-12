@@ -1,4 +1,4 @@
-node-aasguard
+node-keyziio-agent
 =============
 
 A Node.js interface library for the SafeX key management service.  Asynchronous methods use promises.
@@ -6,13 +6,13 @@ A Node.js interface library for the SafeX key management service.  Asynchronous 
 ### Setting the API Token
 
 ```javascript
-aasguard.set_token("token");
+kagent.set_token("token");
 ```
 
 ### Checking the API Token
 
 ```javascript
-aasguard.check()
+kagent.check()
     .then(function(){
         console.log("Successfully connected to SafeX using API Token")
     })
@@ -24,7 +24,7 @@ aasguard.check()
 ### Getting User Infomration
 
 ```javascript
-aasguard.get_user(id)
+kagent.get_user(id)
   .then(function(data){
     // Got the user
   })
@@ -36,7 +36,7 @@ aasguard.get_user(id)
 ### Creating a New User
  
 ```javascript
- aasguard.create_user(id, friendly_name)
+ kagent.create_user(id, friendly_name)
     .then(function(data){
       // User created!
     })
