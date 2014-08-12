@@ -1,7 +1,7 @@
 node-keyziio-agent
 =============
 
-A Node.js interface library for the SafeX key management service.  Asynchronous methods use promises.
+A Node.js interface library for the Keyziio key management and encryption service.  Asynchronous methods use promises.
 
 ### Setting the API Token
 
