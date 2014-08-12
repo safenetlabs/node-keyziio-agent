@@ -21,7 +21,7 @@ describe('#keyziio-agent', function(){
     });
 
     it ('checks against the server', function(done) {
-        var mock = nock('http://safex-demo.herokuapp.com')
+        var mock = nock('http://keyziio.herokuapp.com')
             .log(console.log)
             .filteringPath(/api_token=[^&]*/g, 'api_token=XXX')
             .get('/api/v1/check?api_token=XXX')
@@ -32,7 +32,7 @@ describe('#keyziio-agent', function(){
     });
 
     it ('tells me a user is not there', function(done){
-        var mock = nock('http://safex-demo.herokuapp.com')
+        var mock = nock('http://keyziio.herokuapp.com')
             .log(console.log)
             .filteringPath(/api_token=[^&]*/g, 'api_token=XXX')
 
@@ -44,7 +44,7 @@ describe('#keyziio-agent', function(){
 
     it ('creates a new user', function(done){
         var uid = Math.random().toString().substring(2);
-        var mock = nock('http://safex-demo.herokuapp.com')
+        var mock = nock('http://keyziio.herokuapp.com')
             .log(console.log)
             .filteringPath(/api_token=[^&]*/g, 'api_token=XXX')
             .post('/api/v1/users?api_token=XXX','asp_id=' + uid +'&friendly_name=friendly')
