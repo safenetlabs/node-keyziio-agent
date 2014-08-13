@@ -44,3 +44,9 @@ kagent.get_user(id)
       // Failed to create user
     });
 ```
+
+### Testing
+
+Run the `make` command in the top directory to test.  By default it will run the tests against a mock of the keyziio server.   To run the tests against the actual keyziio service set the environment variable NOCK_OFF to `true`.
+
+`export NOCK_OFF=true`
