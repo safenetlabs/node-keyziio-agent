@@ -119,14 +119,56 @@ Purpose: Create a new user.
 
 Response format is exactly the same as for get user.
 
-## Get/Create data key
+## Get data key
 
-Purpose: Get a data key for encryption.  If the key doesn't exist,
-it will be created automatically.
+Purpose: fetch an existing data key by unique id or by asp user id and asp key name.  This
+is typically the call used for decrypt operations, where you want a key if it exists, but
+do not want to create a key if it does not exist.
 
-Returns: a json response
+Returns: a json response, or 404 if the key is not found
 
-    GET https://keyziio.herokuapp.com/api/v1/data_keys/:name
+Supports either:
+
+    GET https://keyziio.herokuapp.com/api/v1/data_keys/:name?user_id=:user_id
+    
+or
+
+    GET https://keyziio.herokuapp.com/api/v1/data_keys/:uuid
+    
+### Params
+
+- name: The name of the key, e.g. 'email_key' or 'file_encryption_key'.
+  The number of keys and the names of those keys for each user are up to the
+  requirements of your service.
+- user_id: The id of the user for which to create the key.  This must match
+  the 'id' field of the response to a get user call.  It's a UUID.  It is not
+  the 'asp_id' of the user, but rather our internal unique id.
+- uuid: The globally unique id of the key.  This was return in the json response to
+  the create key call, in the "id" attribute.
+
+### Sample Response
+
+```json
+{
+id: "0856b153-f22e-4392-b88f-bb7ade8e9572"
+name: "email_key"
+size: 256
+key: "fClYH+yX1qcOwwX4tTsyS/YT9MpNak0liHOsJmL/3T/qvl5EVeozJYypmGiWfwEEiFOtzcI2ltyZdRhmY3ki//KZaqgUdd0gV2PMsbne8+0L/sbx3PavWAvt7FIBilClB+lJZ/K3g+dO/thwhKeUpo32/3b+6tYkY1NW5xTqDP1Buzjfh4p7cQux3+tExqAwCXZOxqPN+vCsq47f1Vu0Zk3ahk9LX/HfT0cRwdxbL9OJzh2P6erv8Szz9FCyi2Yr1vYwqQQqSFObEk3SWYVPCXAusoId86qdeA6VoBxtVbjEOv9/NWsOMeOVTEYwT0nhqkZEmJSviTfZeXG9vrWp5g=="
+iv: "Ux4tdnq2q04ufNUgT8BKeA=="
+created_at: "2014-08-13T20:54:19.992Z"
+updated_at: "2014-08-13T20:54:19.992Z"
+}
+```
+
+## Create data key
+
+Purpose: Create a data key for encryption.  If the key already exists, it will
+just be returned without creating a new key.
+
+Returns: a json response, and a 201 response code.  The response is identical regardless
+of whether a new key was actually created, or an existing key was returned.
+
+    POST https://keyziio.herokuapp.com/api/v1/data_keys/:name?user_id=:user_id
 
 ### Path Segments
 
