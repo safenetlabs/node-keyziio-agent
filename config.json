@@ -1,0 +1,10 @@
+{
+  "protocol"        : "http://",
+  "keyziio_url"     : "localhost:3000/api/v1",
+  "token_url"       : "/oauth2/token",
+  "token_info"      : "/oauth2/token/info",
+  "get_keypart"     : "/hsm/keyparts",
+  "keychains"       : "/agent/keychains",
+  "id"              : "9e61db7ef1dbddc9f0b812c153f2596126a0a537e96cf50fba76f843bbc4d5c1",
+  "secret"          : "c13c551284878b31b89f690084d88b46b3ed10747d41f5ff04c53cd7acb1fe90"
+}

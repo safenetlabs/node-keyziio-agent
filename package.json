@@ -1,0 +1,18 @@
+{
+  "name": "keyziio-agent",
+  "private": true,
+  "version": "0.0.2",
+  "description": "Interface library to the keyziio web based key management service",
+  "main": "keyziio.js",
+  "author": "Chris Holland <chris.holland@safenet-inc.com>",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.40.0"
+  },
+  "devDependencies": {
+    "gulp": "~3.6.2",
+    "gulp-coffee": "~2.1.2",
+    "gulp-watch": "~0.6.9",
+    "gulp-plumber": "~0.6.4"
+  }
+}
