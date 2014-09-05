@@ -24,7 +24,7 @@ Agent exposes the following:
   
       { bytes: 'R90szYVvpTdltNNfpssjFr1gugdwckhKhpV10FcetlA1JoQu9sObiMagCEqA8Iw+ni2n2eRVu1qjfaQLit1CGkZqMOfaa5y/' }
 
-    
+
     check_token(callback)
     
   Call check_token to verify that the bearer token you have is valid.  It is possible for the bearer tokens to be invalidated either through rotation policy or through administration on the keyzi.io server.  If calls fail to the server - check the bearer token to determing is creating a new one is required.
