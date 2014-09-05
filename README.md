@@ -15,6 +15,7 @@ Agent exposes the following:
       token_type: 'bearer',
       scope: 'none' }
   
+  Get Keypart
 
     get_keypart(callback)
   
@@ -24,8 +25,9 @@ Agent exposes the following:
   
       { bytes: 'R90szYVvpTdltNNfpssjFr1gugdwckhKhpV10FcetlA1JoQu9sObiMagCEqA8Iw+ni2n2eRVu1qjfaQLit1CGkZqMOfaa5y/' }
 
+  Check Token
 
-    check_token(callback)
+      check_token(callback)
     
   Call check_token to verify that the bearer token you have is valid.  It is possible for the bearer tokens to be invalidated either through rotation policy or through administration on the keyzi.io server.  If calls fail to the server - check the bearer token to determing is creating a new one is required.
   
@@ -36,6 +38,8 @@ Agent exposes the following:
         expires_in_seconds: null,
         application: { uid: '9e61db7ef1dbddc9f0b812c153f2596126a0a537e96cf50fba76f843bbc4d5c1' } }
   
+  Create Keychain
+
     create_keychain(name, callback)
     
   Keychains are required for for encryption and decryption by keyziio clients.  The keychain contains a name (defined by you), and id (defined by keyzi.io) and a keypart.  The name provides an optional method for you to identify and look up keychains in the future - and you should take care to make them unique if you want singletons returned.  The id is guaranteed to be unique as is an alternative (and recommended) scheme for you to use to track individual keychains
@@ -46,6 +50,8 @@ Agent exposes the following:
         name: 'randomname',
         keypart: '79IrCgHaazWhG0wcYvY4onEvVYtfgG0wshlayRo4G2JYg9D66F5Ngara1ZeUk9Jg+dcBRHfqsDPKENruZ8Hr7hoJqQZLdryr' }
   
+  Get Keychain
+
     get_keychain(id, callback)
     
   Retrieving key chains currently only accepts the id.  Using name to retrieve a keychain is not currently supported.
@@ -57,6 +63,8 @@ Agent exposes the following:
         keypart: '79IrCgHaazWhG0wcYvY4onEvVYtfgG0wshlayRo4G2JYg9D66F5Ngara1ZeUk9Jg+dcBRHfqsDPKENruZ8Hr7hoJqQZLdryr' }
 
   
+  Token Hash
+
     token_hash
   
   Calling token_hash will return the bearer token if it exists.  This provides an object reference to the bearer token.  You should use get_token to retrienve the token - since it will return the current instance token_hash via the callback if it already exists - and get a new one if it does not.  If you need to refresh your bearer token - you must set this value to null in order that a subsequent get_token will retrieve a new token from keyzi.io
