@@ -9,6 +9,12 @@ Agent exposes the following:
   
   Call get_token to initialize the agent and get a valid bearer token from the keyzi.io server. If a bearer token already exists in the instance - it will be returned without calling the server.  If there is an error message - it will return the error function that contains the error message as well as logging the error to the console.  All returned values are via the callback function - so that you can define what you do with the response.
   
+  Returns:
+  
+      { access_token: '04089af5f3a933a07b12d23d16ba1ae03603acc1b55b0b8f3c279f7d5218eeba',
+      token_type: 'bearer',
+      scope: 'none' }
+  
     get_keypart(callback)
   
   All key chains depend on a split key.  In order to create a keychain you must have a keypart.  You dont need to implement this function as it is called automatically as part of the create_keychain function.  The keypart object or error is returned via the callback
