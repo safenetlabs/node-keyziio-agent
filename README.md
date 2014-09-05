@@ -11,10 +11,21 @@ Agent exposes the following:
   
     get_keypart(callback)
   
-  fjfjf    
+  All key chains depend on a split key.  In order to create a keychain you must have a keypart.  You dont need to implement this function as it is called automatically as part of the create_keychain function.  The keypart object or error is returned via the callback
     
-  check_token(callback)
-  create_keychain(name, callback)
-  get_keychain(id, callback)
-  token_hash
-  error
+    check_token(callback)
+    
+  Call check_token to verify that the bearer token you have is valid.  It is possible for the bearer tokens to be invalidated either through rotation policy or through administration on the keyzi.io server.  If calls fail to the server - check the bearer token to determing is creating a new one is required.
+  
+    create_keychain(name, callback)
+    
+  Keychains are required for for encryption and decryption by keyziio clients.  The keychain contains a name (defined by you), and id (defined by keyzi.io) and a keypart.  The name provides an optional method for you to identify and look up keychains in the future - and you should take care to make them unique if you want singletons returned.  The id is guaranteed to be unique as is an alternative (and recommended) scheme for you to use to track individual keychains
+  
+    get_keychain(id, callback)
+    
+  Retrieving key chains currently only accepts the id.  Using name to retrieve a keychain is not currently supported.
+  
+    token_hash
+  
+  Calling token_hash will return the bearer token if it exists.  This provides an object reference to the bearer token.  You should use get_token to retrienve the token - since it will return the current instance token_hash via the callback if it already exists - and get a new one if it does not.  If you need to refresh your bearer token - you must set this value to null in order that a subsequent get_token will retrieve a new token from keyzi.io
+  
